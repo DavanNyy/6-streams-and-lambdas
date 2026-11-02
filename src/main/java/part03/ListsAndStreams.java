@@ -9,7 +9,15 @@ import java.util.stream.Stream;
  *
  * https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html#stream()
  * https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/stream/Stream.html#toList()
- */
+*
+stream() = lista → stream
+toList() = stream → lista
+sum() = summa
+count() = määrä
+average().orElse(0.0) = keskiarvo
+max().orElse(0) = suurin luku
+rangeClosed(a, b) = luvut väliltä a...b (myös b mukana)
+*/
 public class ListsAndStreams {
 
     /**
@@ -22,7 +30,8 @@ public class ListsAndStreams {
         /*
          * hint: see the documentation of List about how to create a Stream from a List.
          */
-        return null; // TODO
+        return strings.stream(); // TODO
+        //Luo tästä listasta Stream, joka sisältää kaikki samat alkiot.
     }
 
     /**
@@ -32,7 +41,8 @@ public class ListsAndStreams {
      * @return a List of the same strings
      */
     public List<String> makeList(Stream<String> stream) {
-        return null; // TODO
+        return stream.toList(); // TODO
+        //Luo tästä streamistä List, joka sisältää kaikki samat alkiot.
     }
 
     /**
@@ -47,7 +57,11 @@ public class ListsAndStreams {
     public Stream<String> streamWithLimit(List<String> strings, int count) {
         // TODO: check the documentation of Stream!
         // If you want, you can utilize the 'makeStream()' method you implemented above.
-        return null;
+        return strings.stream().limit(count); // TODO
+        
+        //Luo tästä listasta Stream, joka sisältää korkeintaan count alkiota.
+        /*Ensin muutetaan lista streamiksi: strings.stream()
+        Sitten rajoitetaan alkioiden määrää: .limit(count) */
     }
 
 }
