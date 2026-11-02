@@ -8,6 +8,10 @@ import java.util.stream.Stream;
  * used to check if the stream itself or the elements in the stream pass a
  * certain check. For example, you can check if all the elements in a stream are
  * positive numbers.
+ * 
+ * allMatch(...)  // kaikki
+ * anyMatch(...)  // ainakin yksi
+ * noneMatch(...) // ei yhtään
  */
 public class PredicatesWithStreams {
 
@@ -20,7 +24,14 @@ public class PredicatesWithStreams {
      */
     public boolean allPositive(IntStream numbers) {
         // hint: see the `allMatch()` method
-        return false; // TODO
+        return numbers.allMatch(n -> n > 0); // TODO
+
+        // n -> n > 0 = true, jos luku on suurempi kuin 0, 
+        // false, jos luku on 0 tai negatiivinen
+
+        // allMatch() palauttaa:
+        // true → jos kaikki luvut täyttävät ehdon
+        // false → jos yksikin luku ei täytä ehtoa
     }
 
     /**
@@ -35,7 +46,11 @@ public class PredicatesWithStreams {
         /*
          * hint: you can chain the `filter()`, `findFirst()` and `isPresent()` methods.
          */
-        return -1; // TODO
+        return numbers.filter(n -> n > 0).findFirst().orElse(0); // TODO
+        // filter() = suodattaa streamin, eli poistaa kaikki luvut, jotka eivät täytä ehtoa
+        // findFirst() = palauttaa ensimmäisen luvun, joka täyttää ehdon
+        // orElse(0) = jos ei löydy, anna 0
+
     }
 
     /**
@@ -46,6 +61,12 @@ public class PredicatesWithStreams {
      */
     public boolean containsNoNulls(Stream<String> strings) {
         // hint: see the `noneMatch()` method
-        return false; // TODO
+        return strings.noneMatch(s -> s == null); // TODO
+
+        // s -> s == null = true, jos merkkijono on null
+        // noneMatch() palauttaa: 
+        // true → jos yksikään merkkijono ei ole null
+        // false → jos yksikin merkkijono on null
+        
     }
 }
