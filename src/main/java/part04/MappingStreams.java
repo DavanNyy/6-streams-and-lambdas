@@ -32,7 +32,9 @@ public class MappingStreams {
      */
     public IntStream doubleValuesInStream(IntStream numbers) {
         // hint: use the map() method to double the values in the stream.
-        return null; // TODO
+        return numbers.map(x -> x * 2); // map() käy läpi streamin jokaisen alkion.
+
+        // Luo tästä streamistä IntStream, jossa kaikki luvut on kerrottu kahdella.
     }
 
     /**
@@ -45,7 +47,8 @@ public class MappingStreams {
      */
     public IntStream multiplyValuesInStream(IntStream numbers, int multiplier) {
         // hint: use the map() method to multiply the values in the stream.
-        return null; // TODO
+        return numbers.map(x -> x * multiplier); // TODO
+        // ota luku x , kerro luvut millä tahansa kertoimella, palauta uusi arvo
     }
 
     /**
@@ -59,7 +62,11 @@ public class MappingStreams {
          * hint: First, use the stream() method to create a Stream<Integer>.
          * Then, use mapToInt() method to convert that to an IntStream.
          */
-        return null; // TODO
+        return numbers.stream().mapToInt(x -> x); // TODO
+        // stream() → tehdään stream
+        // mapToInt(...) → muutetaan int-arvoiksi
+        // x -> x → palautetaan sama luku
+
     }
 
     /**
@@ -77,7 +84,13 @@ public class MappingStreams {
      */
     public Stream<String> prefixAllStrings(Stream<String> strings, String prefix) {
         // hint: once again, use the map() method to add the prefix
-        return null; // TODO
+        return strings.map(s -> prefix + s); // muuttaa merkkijonot lisäämällä alkuun tekstiä
+
+        // prefix tarkoittaa alkuliitettä("https://") eli tekstiä, joka lisätään
+        // merkkijonon alkuun
+        // ota merkkijono s
+        // lisää sen alkuun prefix
+        // palauta uusi merkkijono
     }
 
     /**
@@ -93,7 +106,12 @@ public class MappingStreams {
      * @return a stream of strings with the suffix added
      */
     public Stream<String> suffixAllStrings(Stream<String> strings, String suffix) {
-        return null; // TODO
+        return strings.map(s -> s + suffix); // TODO
+        // suffix tarkoittaa loppuliitettä("@example.com") eli tekstiä, joka lisätään
+        // merkkijonon loppuun
+        // ota merkkijono s
+        // lisää sen loppuun suffix
+        // palauta uusi merkkijono
     }
 
     /**
@@ -115,7 +133,9 @@ public class MappingStreams {
          * that you call from the lambda expression.
          */
         Function<String, String> remove = x -> {
-            if(!x.endsWith(suffix)) {return x;}
+            if (!x.endsWith(suffix)) {
+                return x;
+            }
             return x.substring(0, x.length() - suffix.length());
         };
         return strings.map(remove); // TODO
@@ -142,6 +162,18 @@ public class MappingStreams {
          */
 
         // hint: see the mapToObj() method in IntStream
-        return null; // TODO
+        return numbers.mapToObj(n -> { // TODO
+        /*mapToInt() = muutetaan int-virraksi
+          mapToObj() = muutetaan olioiksi (esim. String) */
+            if (n % 3 == 0 && n % 5 == 0) {
+                return "FizzBuzz";
+            } else if (n % 3 == 0) {
+                return "Fizz";
+            } else if (n % 5 == 0) {
+                return "Buzz";
+            } else {
+                return String.valueOf(n); //muunnetaan luku tekstiksi
+            } 
+        }); 
     }
 }
