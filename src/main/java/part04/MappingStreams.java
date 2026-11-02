@@ -1,6 +1,7 @@
 package part04;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -113,7 +114,11 @@ public class MappingStreams {
          * hint: If your expression is too complex, you can define a separate method
          * that you call from the lambda expression.
          */
-        return null; // TODO
+        Function<String, String> remove = x -> {
+            if(!x.endsWith(suffix)) {return x;}
+            return x.substring(0, x.length() - suffix.length());
+        };
+        return strings.map(remove); // TODO
     }
 
     /**
