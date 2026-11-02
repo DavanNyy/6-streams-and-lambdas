@@ -25,7 +25,12 @@ public class FilteringStreams {
      */
     public IntStream filterEvenNumbers(IntStream numbers) {
         // hint: use the filter() method to filter out the odd numbers.
-        return null; // TODO
+        return numbers.filter(n -> n % 2 == 0); // TODO
+        //Luo tästä streamistä IntStream, joka sisältää vain parilliset luvut.
+
+        // numbers.filter(...) käy jokaisen luvun läpi.
+        // n -> n % 2 == 0 palauttaa true, jos luku on parillinen.
+        // Vain ne luvut, joille ehto on true, jäävät streamiin.
     }
 
     /**
@@ -40,7 +45,10 @@ public class FilteringStreams {
      */
     public IntStream filterNumbersBetween(IntStream numbers, int min, int max) {
         // hint: use the filter() method to only include numbers between min and max
-        return null; // TODO
+        return numbers.filter(n -> n >= min && n <= max); // TODO
+        //n >= min → luku on vähintään min
+        // n <= max → luku on enintään max
+        // && tarkoittaa ja, joten molempien ehtojen täytyy olla totta
     }
 
     /**
@@ -56,7 +64,14 @@ public class FilteringStreams {
     public Stream<String> filterStringsStartingWith(Stream<String> strings, String prefix) {
         // hint: use the filter() method to only include strings that start with the
         // specified prefix.
-        return null; // TODO
+        return strings.filter(s -> s.startsWith(prefix)); // TODO
+
+        // s.startsWith(prefix) palauttaa true, jos merkkijono alkaa prefixillä
+
+        // s = yksi streamin merkkijono
+        // startsWith(prefix) tarkistaa alkaako merkkijono annetulla etuliitteellä
+        // jos palauttaa true, merkkijono jää streamiin
+        // jos palauttaa false, se poistetaan
     }
 
     /**
@@ -70,7 +85,15 @@ public class FilteringStreams {
      * @return a stream of strings that contain the specified substring
      */
     public Stream<String> filterIncludingSubstring(Stream<String> strings, String include) {
-        return null; // TODO
+        return strings.filter(s -> s.contains(include)); // TODO
+
+        // s = yksi streamin merkkijono
+        // contains() palauttaa true, jos osajono löytyy merkkijonosta
+        // vain true-tapaukset jäävät streamiin
+
+        /* startsWith() // alkaa tekstillä
+        endsWith()   // päättyy tekstiin
+        contains()   // sisältää tekstin */
     }
 
     /**
@@ -84,6 +107,12 @@ public class FilteringStreams {
      * @return a stream of strings that do not contain the specified substring
      */
     public Stream<String> filterNotIncludingSubstring(Stream<String> strings, String exclude) {
-        return null; // TODO
+        return strings.filter(s -> !s.contains(exclude)); // palauttaa true vain, jos osajonoa ei löydy
+        // s = yksi streamin merkkijono
+        // contains() palauttaa true, jos osajono löytyy merkkijonosta
+        // ! tarkoittaa ei, joten vain ne merkkijonot, jotka eivät sisällä osajonoa, jäävät streamiin
+        
+        /*  filter(s -> s.contains("teksti"))   // pidä ne, jotka sisältävät
+            filter(s -> !s.contains("teksti"))  // pidä ne, jotka eivät sisällä */
     }
 }
