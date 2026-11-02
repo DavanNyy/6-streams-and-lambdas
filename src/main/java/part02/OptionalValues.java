@@ -18,6 +18,7 @@ public class OptionalValues {
      * @param stream the IntStream to average
      * @return the average of the numbers in the stream or 0 if the stream is empty
      */
+    
     public double average(IntStream stream) {
         /*
          * See the `average()` method in the documentation of IntStream. Note that the
@@ -30,7 +31,10 @@ public class OptionalValues {
          * is empty.
          */
 
-        return -1; // TODO
+        return stream.average().orElse(0.0); 
+        //stream.average() laskee keskiarvon ja palauttaa OptionalDouble-olion.
+        //orElse(0.0) palauttaa keskiarvon, jos sellainen on.
+        //Jos stream on tyhjä, palautetaan 0.0
     }
 
     /**
@@ -41,6 +45,10 @@ public class OptionalValues {
      * @return the maximum value in the stream or 0 if the stream is empty
      */
     public int maximum(IntStream stream) {
-        return -1; // TODO: see the IntStream documentation
+        return stream.max().orElse(0); // TODO: see the IntStream documentation
+        
+        //stream.max() etsii suurimman luvun.
+        //Se palauttaa OptionalInt-olion, koska stream voi olla tyhjä.
+        //orElse(0) palauttaa suurimman luvun tai 0, jos stream on tyhjä.
     }
 }
