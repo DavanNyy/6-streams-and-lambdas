@@ -9,6 +9,10 @@ import person.Person;
  * This class contains methods that handle streams of objects. You will learn
  * that using your own classes, such as Person, in streams is very similar to
  * using streams of built-in types, such as String and Integer.
+ * 
+ * map(s -> s.length()) // merkkijonon pituus
+ * map(p -> p.age())    // henkilön ikä
+ * map(p -> p.name())   // henkilön nimi
  */
 public class ObjectStreams {
 
@@ -19,7 +23,12 @@ public class ObjectStreams {
      * @return a list of the lengths of the strings
      */
     public List<Integer> getLengths(Stream<String> strings) {
-        return null; // TODO
+        return strings.map( s -> s.length()).toList(); // TODO
+
+        // filter(...) = poistaa alkioita
+        // map(...) = muuttaa alkioita
+        // toList() = tekee streamista listan
+        // Luo tästä streamistä lista, joka sisältää jokaisen merkkijonon pituuden.
     }
 
     /**
@@ -37,7 +46,14 @@ public class ObjectStreams {
      */
     public List<Integer> getAges(Stream<Person> persons) {
         // Hint: This method is very similar to the getLengths() method above!
-        return null; // TODO
+        return persons.map(p -> p.age()).toList(); // TODO
+
+        // Luo tästä streamistä lista, joka sisältää jokaisen henkilön iän.
+        // map(...) = muuttaa alkioita
+        // toList() = tekee streamista listan
+        // p = Person-olio (esim. Person{name=Ada, age=20}) 
+        // p.age() = haetaan ikä
+        // p -> p.age() = palauttaa henkilön iän
     }
 
     /**
@@ -52,7 +68,13 @@ public class ObjectStreams {
      * @return a list of the names
      */
     public List<String> getNames(Stream<Person> persons) {
-        return null; // TODO
+        return persons.map(p -> p.name()).toList(); // TODO
+        
+        // map(...) = muuttaa alkioita
+        // toList() = tekee streamista listan
+        // p = Person-olio (esim. Person{name=Ada, age=20
+        // p.name() = haetaan nimi
+        // p -> p.name() = palauttaa henkilön nimen
     }
 
     /**
@@ -67,6 +89,15 @@ public class ObjectStreams {
          * Hint: you can use the `getAges()` method above to get a stream of the ages.
          * You may remember `mapToInt()` and `average` from previous exercises.
          */
-        return -1; // TODO
+        return persons.mapToInt(p -> p.age()).average().orElse(0.0); // TODO
+
+        // mapToInt(...) = muuttaa streamin IntStreamiksi
+        // average() = laskee keskiarvon
+        // orElse(0.0) = jos stream on tyhjä, palautetaan 0.0
+
+        // p = Person-olio (esim. Person{name=Ada, age=20})
+        // p.age() = haetaan ikä
+        // p -> p.age() = palauttaa henkilön iän
+
     }
 }
