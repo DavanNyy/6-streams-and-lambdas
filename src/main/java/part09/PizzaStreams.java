@@ -12,6 +12,10 @@ import pizza.Pizza;
  *
  * In this exercise you will implement a few methods that can be used to select
  * pizzas based on their personal preferences.
+ * 
+ * allMatch(...)  // kaikki täsmäävät
+ * anyMatch(...)  // vähintään yksi täsmää
+ * noneMatch(...) // yksikään ei täsmää
  */
 public class PizzaStreams {
 
@@ -29,7 +33,16 @@ public class PizzaStreams {
          * You can use the toppings() method of a Pizza to get the toppings as a
          * list of strings.
          */
-        return null; // TODO: implement this method
+        return pizzas.filter(p -> p.toppings().contains("pineapple")); // Pidä vain ne pizzat, joiden täytteissä on pineapple
+
+        // p = Pizza-olio (esim. Pizza{name=Hawaiian, price=10.90, toppings=[ham, pineapple, mozarella]})
+        // p.toppings() = palauttaa listan, joka sisältää pizzan täytteet
+        // contains("pineapple") = tarkistaa, onko listassa "pineapple
+
+        // filter() = suodattaa streamin, eli poistaa kaikki pizzat, jotka eivät täytä ehtoa
+        // p -> p.toppings().contains("pineapple") = palauttaa true, jos pizzassa on ananas
+        // palauttaa false, jos pizzassa ei ole ananasta
+    
     }
 
     /**
@@ -43,7 +56,12 @@ public class PizzaStreams {
          * Like the previous method, but this time you must select the pizzas
          * that do not have "pineapple" as a topping.
          */
-        return null; // TODO: implement this method
+        return pizzas.filter(p -> !p.toppings().contains("pineapple")); // TODO: implement this method
+
+        // p = Pizza-olio
+        // p.toppings() = palauttaa listan, joka sisältää pizzan täytteet
+        // contains("pineapple") = tarkistaa, onko listassa "pineapple
+        // ! tarkoittaa ei, joten vain ne pizzat, joissa ei ole ananasta, jäävät streamiin
     }
 
     /**
@@ -60,7 +78,14 @@ public class PizzaStreams {
          * that have the given topping. You can assume that toppings are
          * always in lower case.
          */
-        return null; // TODO: implement this method
+        return pizzas.filter(p -> p.toppings().contains(topping)); // TODO: implement this method
+
+        // p = Pizza-olio
+        // p.toppings() = palauttaa listan, joka sisältää pizzan täytteet
+        // contains(topping) = tarkistaa, onko listassa annettu täyte
+        // vain ne pizzat, joissa on annettu täyte, jäävät streamiin
+        // filter() = suodattaa streamin, eli poistaa kaikki pizzat, jotka eivät täytä ehtoa
+        // p -> p.toppings().contains(topping) = Tarkista, onko pizzassa tämä täyte
     }
 
     /**
@@ -81,7 +106,13 @@ public class PizzaStreams {
          * of the given toppings and then use that method here. You are also allowed to
          * add new methods in the Pizza class.
          */
-        return null; // TODO: implement this method
+        return pizzas.filter(p -> toppings.stream().anyMatch(t -> p.toppings().contains(t))); // TODO: implement this method
+        // p = Pizza-olio
+        // p.toppings() = palauttaa listan, joka sisältää pizzan täytte
+        // toppings.stream() = luo streamin annetuista täytteistä
+        // anyMatch(t -> p.toppings().contains(t)) = palauttaa true, jos pizzassa on jokin annetuista täytteistä
+        // filter() = suodattaa streamin, eli poistaa kaikki pizzat, jotka eivät täytä ehtoa
+        // p -> toppings.stream().anyMatch(t -> p.toppings().contains(t)) = Käy täytelista läpi ja tarkista, löytyykö jokin niistä pizzasta
     }
 
     /**
@@ -100,7 +131,15 @@ public class PizzaStreams {
          * https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/stream
          * /Stream.html#sorted(java.util.Comparator)
          */
-        return null; // TODO: implement this method
+        return pizzas.sorted((p1, p2) -> Double.compare(p1.price(), p2.price())); // TODO: implement this method
+        // Järjestä pizzat halvimmasta kalleimpaan
+
+        // p1 = ensimmäinen pizza
+        // p2 = toinen pizza
+        // p1.price() = ensimmäisen pizzan hinta
+        // p2.price() = toisen pizzan hinta
+        // Double.compare(p1.price(), p2.price()) = vertaa kahta hintaa
+        // sorted() = järjestää streamin alkioita
     }
 
     /**
@@ -118,6 +157,15 @@ public class PizzaStreams {
          * compareToIgnoreCase() method of the String class to compare the names of the
          * pizzas.
          */
-        return null; // TODO: implement this method
+        return pizzas.sorted((p1, p2) -> p1.name().compareToIgnoreCase(p2.name())); // TODO: implement this method
+        // Järjestä pizzat aakkosjärjestykseen
+
+        // p1 = ensimmäinen pizza
+        // p2 = toinen pizza
+        // p1.name() = ensimmäisen pizzan nimi
+        // p2.name() = toisen pizzan nimi
+        // compareToIgnoreCase() = vertaa kahta merkkijonoa aakkosjärjestyksessä
+        // sorted() = järjestää streamin alkioita
+        // p1.name().compareToIgnoreCase(p2.name()) = Vertaa pizzojen nimiä aakkosjärjestykseen 
     }
 }
