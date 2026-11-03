@@ -94,7 +94,7 @@ public class ObjectStreams {
         // mapToInt(...) = muuttaa streamin IntStreamiksi
         // average() = laskee keskiarvon
         // orElse(0.0) = jos stream on tyhjä, palautetaan 0.0
-
+        
         // p = Person-olio (esim. Person{name=Ada, age=20})
         // p.age() = haetaan ikä
         // p -> p.age() = palauttaa henkilön iän

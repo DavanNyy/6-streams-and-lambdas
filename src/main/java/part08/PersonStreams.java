@@ -20,7 +20,14 @@ public class PersonStreams {
      */
     public Stream<Person> getAdults(Stream<Person> persons) {
         // Hint: you can call the `age()` method on a Person object to get the age.
-        return null; // TODO
+        return persons.filter(p -> p.age() >= 18); // "pidä vain henkilöt, joiden ikä on vähintään 18"
+
+        // p = Person-olio (esim. Person{name=Ada, age=20})
+        // p.age() = haetaan ikä
+        // >= 18 tarkistaa onko henkilö aikuinen
+        // p.age() >= 18 = true, jos henkilö on täysi-ikäinen
+
+        // filter() = suodattaa streamin, eli poistaa kaikki henkilöt, jotka eivät täytä ehtoa
     }
 
     /**
@@ -38,7 +45,17 @@ public class PersonStreams {
          * create new Person objects with incremented ages. The name and age of a Person
          * object can be accessed using the `name()` and `age()` methods.
          */
-        return null; // TODO
+        return persons.map(p -> new Person(p.name(), p.age() + 1)); // TODO
+        // Luo tästä streamistä uusi stream, joka sisältää uusia Person-olioita, joiden ikä on yhden suurempi kuin alkuperäisissä olioissa.
+        // filter() poistaa alkioita.
+        // map() muuttaa jokaisen alkion toiseksi.
+
+        // p = Person-olio (esim. Person{name=Ada, age=20})
+        // p.name() = haetaan nimi
+        // p.age() = haetaan ikä
+        // p.age() + 1 = lisää ikään yksi
+        // new Person(...) = luo uusi olio
+        // new Person(p.name(), p.age() + 1) = Ota henkilö, pidä nimi samana ja lisää ikään yksi.
     }
 
     /**
@@ -53,6 +70,16 @@ public class PersonStreams {
      * @return a stream of Person objects
      */
     public Stream<Person> csvToPersons(Stream<String> csvLines) {
-        return null; // TODO
+        return csvLines.map(line -> {
+            String[] parts = line.split(",");
+            return new Person(parts[0], Integer.parseInt(parts[1]));
+        }); // TODO
+
+        /*  split(",")          // jaa rivi pilkun kohdalta
+            parts[0]            // nimi
+            parts[1]            // ikä tekstinä
+            Integer.parseInt()  // tekstistä numero
+            new Person(...)     // luo henkilö
+            map(...)            // tee jokaisesta rivistä Person   */
     }
 }
